@@ -4228,6 +4228,27 @@
     z-index: 5;
 }
 
+@media (max-width: 768px) {
+
+    .breadcrumb {
+        display: none; /* 🔥 easiest fix */
+    }
+
+    .header-right {
+        gap: 8px;
+    }
+
+    .header-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .user-avatar {
+        width: 30px;
+        height: 30px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -4298,10 +4319,10 @@
                     <i class="fas fa-film"></i>
                     <span>Movies</span>
                 </button>
-                <button class="nav-item" onclick="showPage('tvShows', this)">
+                <!-- <button class="nav-item" onclick="showPage('tvShows', this)">
                     <i class="fas fa-tv"></i>
                     <span>TV Shows</span>
-                </button>
+                </button> -->
                 <button class="nav-item" onclick="showPage('newReleases', this)">
                     <i class="fas fa-star"></i>
                     <span>New Releases</span>
@@ -6146,31 +6167,6 @@
             element.classList.toggle('expanded');
         }
 
-        // Initialize Charts
-        document.addEventListener('DOMContentLoaded', function() {
-            // Users Chart
-            const usersCtx = document.getElementById('usersChart');
-            if (usersCtx) {
-                new Chart(usersCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['New Customer', 'Existing Subscribers', 'Daily Visitors', 'Extended Subscribers'],
-                        datasets: [{
-                            data: [25, 30, 25, 20],
-                            backgroundColor: ['#0071eb', '#e50914', '#ffa500', '#46d369'],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        cutout: '65%',
-                        plugins: { legend: { display: false } }
-                    }
-                });
-            }
-        });
-
         // Checkbox Toggle
         document.querySelectorAll('.custom-checkbox').forEach(checkbox => {
             checkbox.addEventListener('click', function() {
@@ -6342,106 +6338,6 @@
         Chart.defaults.borderColor = '#2a2a2a';
         Chart.defaults.font.family = "'Segoe UI', sans-serif";
 
-        // Users Doughnut Chart
-        const usersCtx = document.getElementById('usersChart').getContext('2d');
-        new Chart(usersCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['New Customer', 'Existing Subscribers', 'Daily Visitors', 'Extended Subscribers'],
-                datasets: [{
-                    data: [30, 25, 25, 20],
-                    backgroundColor: [
-                        '#0071eb',
-                        '#e50914',
-                        '#ffa500',
-                        '#46d369'
-                    ],
-                    borderWidth: 0,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '70%',
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
-
-        // Categories Bar Chart
-        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
-        new Chart(categoryCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Action', 'Comedy', 'Drama', 'Horror', 'Thriller'],
-                datasets: [{
-                    label: 'This Month',
-                    data: [65, 59, 80, 81, 56],
-                    backgroundColor: '#e50914',
-                    borderRadius: 4
-                }, {
-                    label: 'Last Month',
-                    data: [45, 70, 60, 70, 45],
-                    backgroundColor: '#0071eb',
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#2a2a2a'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-
-        // Today Doughnut Chart
-        const todayCtx = document.getElementById('todayChart').getContext('2d');
-        new Chart(todayCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Active', 'Inactive', 'New', 'Returning'],
-                datasets: [{
-                    data: [35, 20, 25, 20],
-                    backgroundColor: [
-                        '#e50914',
-                        '#ffa500',
-                        '#0071eb',
-                        '#46d369'
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '60%',
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
     </script>
 
     <script>

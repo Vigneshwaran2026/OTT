@@ -1876,6 +1876,55 @@
     margin-left: 6px;
     vertical-align: middle;
 }
+
+
+@media (max-width: 768px) {
+
+    .header {
+        padding: 10px;
+    }
+
+    /* LEFT SIDE */
+    .header-left {
+        gap: 8px;
+    }
+
+    /* HIDE LONG TEXT */
+    .breadcrumb {
+        display: none; /* 🔥 hide "Admin Dashboard" */
+    }
+
+    /* RIGHT SIDE */
+    .header-right {
+        gap: 6px;
+    }
+
+    /* ICON SIZE */
+    .header-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    /* PROFILE FIX */
+    .user-profile {
+        padding: 0;
+        gap: 0;
+    }
+
+    .user-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    /* HIDE NAME (already done) */
+    .user-info {
+        display: none;
+    }
+}
+
+
     </style>
 </head>
 <body>
