@@ -49,17 +49,6 @@ window.addEventListener("scroll", ()=>{
     }
 });
 
-const featured = document.querySelector(".featured");
-
-window.addEventListener("scroll", () => {
-    const top = featured.getBoundingClientRect().top;
-
-    if(top < window.innerHeight - 100){
-        featured.style.opacity = "1";
-        featured.style.transform = "translateY(0)";
-    }
-});
-
 
 const trailer = document.querySelector(".upcoming-trailer");
 
