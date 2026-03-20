@@ -1360,7 +1360,7 @@ header {
     overflow: hidden;
     padding:100px 60px;
     position:relative;
-    background:url('images/counter1.webp') center/cover no-repeat;
+    background:url('Images/counter1.webp') center/cover no-repeat;
 }
 
 /* DARK OVERLAY */
@@ -2508,7 +2508,7 @@ header{
     position:absolute;
     width:100%;
     height:100%;
-    background:url("images/footer.webp") no-repeat center/cover;
+    background:url("Images/footer.webp") no-repeat center/cover;
     z-index:-2;
 }
 
