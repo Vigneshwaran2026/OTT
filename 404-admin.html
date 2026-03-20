@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(229, 9, 20, 0.1);
+            animation: float 15s infinite linear;
+            border-radius: 50%;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .content {
+            text-align: center;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #e50914;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .error-code {
+            font-size: 150px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #e50914 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .error-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .error-message {
+            font-size: 16px;
+            color: #b3b3b3;
+            margin-bottom: 40px;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #e50914;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ff0a16;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #2a2a2a;
+        }
+
+        .btn-secondary:hover {
+            border-color: #e50914;
+            color: #e50914;
+        }
+
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.3s infinite linear alternate-reverse;
+            color: #00ffff;
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.3s infinite linear alternate-reverse;
+            color: #ff00ff;
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 0); }
+            20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 0); }
+            40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 0); }
+            60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, 0); }
+            80% { clip-path: inset(10% 0 70% 0); transform: translate(-2px, 0); }
+            100% { clip-path: inset(30% 0 20% 0); transform: translate(2px, 0); }
+        }
+
+        @keyframes glitch-2 {
+            0% { clip-path: inset(15% 0 85% 0); transform: translate(2px, 0); }
+            20% { clip-path: inset(65% 0 5% 0); transform: translate(-2px, 0); }
+            40% { clip-path: inset(45% 0 45% 0); transform: translate(2px, 0); }
+            60% { clip-path: inset(85% 0 10% 0); transform: translate(-2px, 0); }
+            80% { clip-path: inset(5% 0 75% 0); transform: translate(2px, 0); }
+            100% { clip-path: inset(25% 0 25% 0); transform: translate(-2px, 0); }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .error-code {
+                font-size: 100px;
+            }
+            .error-title {
+                font-size: 24px;
+            }
+        }
+
+        .logo {
+    display: flex;
+    align-items: center;
+}
+
+/* LOGO IMAGE SIZE */
+.logo img {
+    width: 200px;   /* adjust if needed */
+    height: auto;
+    object-fit: contain;
+}
+    </style>
+</head>
+<body>
+    <div class="bg-animation" id="bgAnimation"></div>
+    
+    <div class="content">
+        <div class="logo">
+    <img src="images/logo.webp" alt="Stackly Logo">
+</div>
+        
+        <div class="error-code glitch" data-text="404">404</div>
+        
+        <h1 class="error-title">Page Not Found</h1>
+        
+        <p class="error-message">
+            Oops! The page you're looking for seems to have wandered off into the streaming void. 
+            It might have been moved, deleted, or never existed.
+        </p>
+        
+        <div class="buttons">
+            <a href="admin-dashboard.html" class="btn btn-primary">
+                <i class="fas fa-home"></i>
+                Back to Dashboard
+            </a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        &copy; 2026 Stackly. All rights reserved.
+    </div>
+
+    <script>
+        // Create animated background particles
+        const bgAnimation = document.getElementById('bgAnimation');
+        for (let i = 0; i < 20; i++) {
+            const span = document.createElement('span');
+            span.style.left = Math.random() * 100 + '%';
+            span.style.animationDelay = Math.random() * 15 + 's';
+            span.style.animationDuration = (10 + Math.random() * 10) + 's';
+            bgAnimation.appendChild(span);
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

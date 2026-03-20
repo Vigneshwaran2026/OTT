@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Stackly OTT</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    /* REGISTER SECTION */
+.register-section{
+    min-height:100vh;
+    background:#000;
+    position:relative;
+}
+
+/* BACK BUTTON */
+.back-home{
+    position:absolute;
+    top:20px;
+    left:20px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#fff;
+    text-decoration:none;
+    background:rgba(255,255,255,0.08);
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    transition:0.3s;
+    z-index:10;
+}
+
+.back-home i{
+    font-size:16px;
+}
+
+.back-home:hover{
+    background:#e50914;
+    transform:translateX(-5px);
+}
+
+/* CONTAINER */
+.register-container{
+    display:flex;
+    height:100vh;
+}
+
+
+/* DARK OVERLAY */
+.image-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to right,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.6)
+    );
+}
+
+
+.left-logo{
+    width:200px;
+    margin-bottom:20px;
+}
+
+/* LEFT SIDE (CENTER CONTENT) */
+.register-left{
+    width:60%;
+    position:relative;
+    background:url("images/pricing.webp") center/cover no-repeat;
+    display:flex;
+    justify-content:center;   /* center horizontally */
+    align-items:center;       /* center vertically */
+    text-align:center;        /* center text */
+    padding:40px;
+}
+
+/* CONTENT CENTER */
+.image-content{
+    position:relative;
+    z-index:2;
+    color:#fff;
+    max-width:500px;
+}
+
+/* OPTIONAL: BETTER SPACING */
+.image-content h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.image-content p{
+    color:#ccc;
+    margin-bottom:20px;
+    line-height:1.6;
+}
+
+.image-content ul{
+    list-style:none;
+    padding:0;
+}
+
+.image-content ul li{
+    margin:10px 0;
+    color:#ddd;
+}
+/* RIGHT SIDE */
+.register-right{
+    width:40%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* FORM BOX */
+.register-box{
+    width:320px;
+}
+
+/* TITLE */
+.register-box h2{
+    color:#fff;
+    margin-bottom:20px;
+}
+
+/* INPUT */
+.reg-input{
+    margin-bottom:15px;
+}
+
+.reg-input input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+}
+
+.reg-input input:focus{
+    border-color:#e50914;
+    outline:none;
+}
+
+/* BUTTON */
+.reg-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:#e50914;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.reg-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 15px rgba(229,9,20,0.6);
+}
+
+/* LOGIN LINK */
+.login-link{
+    color:#aaa;
+    margin-top:15px;
+}
+
+/* LOGIN LINK BUTTON STYLE */
+.login-link a{
+    color:#e50914;
+    text-decoration:none;
+    position:relative;
+    font-weight:600;
+    transition:0.3s;
+}
+
+/* UNDERLINE ANIMATION */
+.login-link a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-3px;
+    width:0%;
+    height:2px;
+    background:#e50914;
+    transition:0.3s;
+}
+
+/* HOVER EFFECT */
+.login-link a:hover{
+    color:#fff;
+    text-shadow:0 0 8px rgba(229,9,20,0.8);
+}
+
+.login-link a:hover::after{
+    width:100%;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media(max-width:768px){
+
+    /* FULL STACK */
+    .register-container{
+        flex-direction:column;
+        height:auto;
+    }
+
+    /* BACK BUTTON */
+    .back-home{
+        top:15px;
+        left:15px;
+        padding:8px 14px;
+        font-size:12px;
+    }
+
+    /* LEFT IMAGE SECTION */
+    .register-left{
+        width:100%;
+        height:55vh;
+        padding:20px;
+        justify-content:center;
+        align-items:center;
+    }
+
+    /* CONTENT */
+    .image-content{
+        max-width:100%;
+        padding:10px;
+    }
+
+    .left-logo{
+        width:120px;
+        margin-bottom:15px;
+    }
+
+    .image-content h1{
+        font-size:22px;
+        line-height:1.4;
+    }
+
+    .image-content p{
+        font-size:13px;
+        line-height:1.5;
+    }
+
+    .image-content ul li{
+        font-size:13px;
+    }
+
+    /* RIGHT FORM SECTION */
+    .register-right{
+        width:100%;
+        height:auto;
+        padding:30px 20px;
+    }
+
+    .register-box{
+        width:100%;
+        max-width:350px;
+    }
+
+    .register-box h2{
+        font-size:22px;
+        text-align:center;
+    }
+
+    /* INPUT */
+    .reg-input input{
+        padding:10px;
+        font-size:14px;
+    }
+
+    /* BUTTON */
+    .reg-btn{
+        padding:10px;
+        font-size:14px;
+    }
+
+    /* LOGIN LINK */
+    .login-link{
+        text-align:center;
+        font-size:13px;
+    }
+}
+
+
+@media(max-width:480px){
+
+    .image-content h1{
+        font-size:18px;
+    }
+
+    .image-content p{
+        font-size:12px;
+    }
+
+    .left-logo{
+        width:100px;
+    }
+
+    .register-box h2{
+        font-size:20px;
+    }
+}
+
+.error{
+    color:#e50914;
+    font-size:12px;
+    display:block;
+    margin-top:5px;
+}
+
+/* SUCCESS MESSAGE */
+.success-msg{
+    display:none;
+    color:#0a4f13;
+    padding:12px;
+    border-radius:6px;
+    text-align:center;
+    margin-bottom:15px;
+    font-size:14px;
+    animation:fadeIn 0.5s ease;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(-10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* SELECT DROPDOWN FIX */
+.reg-input select{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    appearance:none;
+
+    /* ADD CUSTOM ARROW */
+    background-image: url("data:image/svg+xml,%3Csvg fill='%23ffffff' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size:16px;
+
+    cursor:pointer;
+}
+
+/* FOCUS */
+.reg-input select:focus{
+    border-color:#e50914;
+    outline:none;
+}
+</style>
+</head>
+
+<body>
+
+<section class="register-section">
+
+    <!-- BACK BUTTON -->
+    <a href="index.html" class="back-home">
+        <i class="fa-solid fa-arrow-left-long"></i>
+        <span>Back to Home</span>
+    </a>
+
+    <div class="register-container">
+
+        <!-- LEFT SIDE -->
+        <div class="register-left">
+
+            <div class="image-overlay"></div>
+
+            <div class="image-content">
+                <img src="images/logo.webp" class="left-logo">
+
+                <h1>Welcome Back </h1>
+                <p>Login to continue watching your favorite movies and shows.</p>
+
+                <ul>
+                    <li>✔ Resume watching anytime</li>
+                    <li>✔ Personalized recommendations</li>
+                    <li>✔ Access premium content</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="register-right">
+
+            <div class="register-box">
+
+                <!-- SUCCESS MESSAGE -->
+                <div id="loginMsg" class="success-msg"></div>
+
+                <h2>Login</h2>
+
+                <form id="loginForm">
+
+                    <div class="reg-input">
+    <select id="loginRole">
+        <option value="">Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="subscriber">Subscriber</option>
+    </select>
+    <small class="error" id="loginRoleError"></small>
+</div>
+
+                    <div class="reg-input">
+                        <input type="email" id="loginEmail" placeholder="Email Address">
+                        <small class="error" id="loginEmailError"></small>
+                    </div>
+
+                    <div class="reg-input">
+                        <input type="password" id="loginPassword" placeholder="Password">
+                        <small class="error" id="loginPassError"></small>
+                    </div>
+
+                    <button type="submit" class="reg-btn">Login</button>
+
+                </form>
+
+                <p class="login-link">
+                    Don’t have account?
+                    <a href="subscribe.html">Sign Up</a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const loginForm = document.getElementById("loginForm");
+
+    loginForm.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        let email = document.getElementById("loginEmail").value.trim();
+        let password = document.getElementById("loginPassword").value.trim();
+        let role = document.getElementById("loginRole").value;
+
+        let isValid = true;
+
+        // CLEAR ERRORS
+        document.getElementById("loginEmailError").innerText = "";
+        document.getElementById("loginPassError").innerText = "";
+        document.getElementById("loginRoleError").innerText = "";
+        document.getElementById("loginMsg").style.display = "none";
+
+        // EMAIL VALIDATION
+        let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+        if(email === ""){
+            document.getElementById("loginEmailError").innerText = "Please enter email";
+            isValid = false;
+        } else if(!email.match(emailPattern)){
+            document.getElementById("loginEmailError").innerText = "Enter valid email";
+            isValid = false;
+        }
+
+        // ROLE VALIDATION
+        if(role === ""){
+            document.getElementById("loginRoleError").innerText = "Please select role";
+            isValid = false;
+        }
+
+        // PASSWORD VALIDATION (STRONG)
+        let strongPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+        if(password === ""){
+            document.getElementById("loginPassError").innerText = "Please enter password";
+            isValid = false;
+        } else if(!strongPassword.test(password)){
+            document.getElementById("loginPassError").innerText =
+            "Min 8 chars, 1 uppercase, 1 lowercase, 1 number & 1 special char";
+            isValid = false;
+        }
+
+        // STOP IF INVALID
+        if(!isValid){
+            return;
+        }
+
+        // ✅ SUCCESS (NO REGISTER CHECK)
+        document.getElementById("loginMsg").innerText =
+        "Login Successful Redirecting...";
+        document.getElementById("loginMsg").style.display = "block";
+
+        // STORE EMAIL FOR DASHBOARD
+        localStorage.setItem("loggedInEmail", email);
+
+        // REDIRECT BASED ON ROLE
+        setTimeout(()=>{
+
+            if(role === "admin"){
+                window.location.href = "admin-dashboard.html";
+            } else {
+                window.location.href = "user-dashboard.html";
+            }
+
+        },1000);
+
+    });
+
+});
+</script>
+</body>
+</html>

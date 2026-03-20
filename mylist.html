@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly OTT</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+   /* TV SHOWS BACKGROUND */
+.tv-breadcrumb{
+    background-image: url("images/mylist.webp"); /* 🔥 your image */
+}
+
+/* DARK OVERLAY */
+.breadcrumb-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,0.9)
+    );
+}
+
+/* CONTENT */
+.breadcrumb-content{
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+/* TITLE */
+.breadcrumb-content h1{
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+/* PATH */
+.breadcrumb-content p{
+    color: #ccc;
+}
+
+.breadcrumb-content a{
+    color: #e50914;
+    text-decoration: none;
+}
+
+
+@media (max-width: 768px){
+
+    .breadcrumb{
+        height: 180px;
+        margin-top: 70px;
+    }
+
+    .breadcrumb-content h1{
+        font-size: 24px;
+    }
+
+    .breadcrumb-content p{
+        font-size: 13px;
+    }
+}
+
+/* SECTION */
+.my-list-section{
+    padding:60px 5%;
+    background:#000;
+}
+
+/* GRID */
+.my-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+/* CARD */
+.my-card{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:0.4s;
+}
+
+/* IMAGE */
+.my-card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+}
+
+/* HOVER */
+.my-card:hover{
+    transform:scale(1.05);
+}
+
+/* OVERLAY */
+.my-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:15px;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.8),
+        transparent
+    );
+
+    opacity:0;
+    transition:0.3s;
+}
+
+.my-card:hover .my-overlay{
+    opacity:1;
+}
+
+/* ACTIONS */
+.my-actions{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.my-actions button{
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:50%;
+    background:#e50914;
+    color:#fff;
+    cursor:pointer;
+}
+
+/* TEXT */
+.my-overlay h3{
+    margin:0;
+}
+
+.my-overlay p{
+    font-size:13px;
+    color:#ccc;
+}
+
+/* TABLET */
+@media(max-width:1024px){
+    .my-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .my-hero-content{
+        left:20px;
+    }
+
+    .my-title{
+        font-size:26px;
+    }
+
+    .my-grid{
+        grid-template-columns:1fr;
+    }
+
+    .my-card img{
+        height:220px;
+    }
+
+    .my-actions button{
+        width:35px;
+        height:35px;
+    }
+}
+
+/* SECTION */
+.my-continue-section{
+    padding:60px 5%;
+    background:#0b0b0b;
+}
+
+/* TITLE */
+.my-continue-title{
+    font-size:24px;
+    margin-bottom:25px;
+}
+
+/* ROW */
+.my-continue-row{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+}
+
+.my-continue-row::-webkit-scrollbar{
+    display:none;
+}
+
+/* CARD */
+.my-continue-card{
+    position:relative;
+    min-width:220px;
+    cursor:pointer;
+}
+
+/* IMAGE */
+.my-continue-card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+/* OVERLAY */
+.my-continue-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    border-radius:12px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    opacity:0;
+    transition:0.3s;
+}
+
+.my-continue-card:hover .my-continue-overlay{
+    opacity:1;
+}
+
+/* PLAY */
+.my-continue-play{
+    width:60px;
+    height:60px;
+    background:#e50914;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:22px;
+}
+
+/* PROGRESS BAR */
+.my-progress-bar{
+    position:absolute;
+    bottom:35px;
+    left:10px;
+    width:90%;
+    height:5px;
+    background:#333;
+    border-radius:10px;
+}
+
+.my-progress{
+    height:100%;
+    background:#e50914;
+    border-radius:10px;
+}
+
+/* TITLE */
+.my-continue-name{
+    margin-top:10px;
+    font-size:14px;
+}
+
+
+@media(max-width:768px){
+
+    .my-continue-card{
+        min-width:160px;
+    }
+
+    .my-continue-card img{
+        height:220px;
+    }
+
+    .my-continue-play{
+        width:45px;
+        height:45px;
+        font-size:16px;
+    }
+}
+
+/* SECTION */
+.my-recommend-section{
+    padding:60px 5%;
+    background:#0b0b0b;
+}
+
+/* TITLE */
+.my-recommend-title{
+    font-size:24px;
+    margin-bottom:25px;
+}
+
+/* ROW */
+.my-recommend-row{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+}
+
+.my-recommend-row::-webkit-scrollbar{
+    display:none;
+}
+
+/* CARD */
+.my-recommend-card{
+    position:relative;
+    min-width:220px;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+/* IMAGE */
+.my-recommend-card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+}
+
+/* OVERLAY */
+.my-recommend-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.8),
+        rgba(0,0,0,0.2),
+        transparent
+    );
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:15px;
+
+    opacity:0;
+    transition:0.3s;
+}
+
+.my-recommend-card:hover .my-recommend-overlay{
+    opacity:1;
+}
+
+/* PLAY */
+.my-recommend-play{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0.8);
+
+    width:55px;
+    height:55px;
+    background:#e50914;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#fff;
+    font-size:20px;
+
+    opacity:0;
+    transition:0.3s;
+}
+
+.my-recommend-card:hover .my-recommend-play{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+}
+
+/* ACTION BUTTONS */
+.my-recommend-actions{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.my-recommend-actions button{
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    background:#e50914;
+    color:#fff;
+    cursor:pointer;
+}
+
+/* TITLE */
+.my-recommend-overlay h4{
+    margin:0;
+}
+
+/* ===============================
+   MOBILE (≤768px)
+================================= */
+@media(max-width:768px){
+
+    /* SECTION PADDING */
+    .my-recommend-section{
+        padding:30px 15px;
+    }
+
+    /* ROW → CHANGE TO COLUMN */
+    .my-recommend-row{
+        display:flex;
+        flex-direction:column;   /* 🔥 stack cards */
+        gap:20px;
+        overflow:visible;        /* 🔥 remove scroll */
+    }
+
+    /* CARD FULL WIDTH */
+    .my-recommend-card{
+        min-width:100%;          /* 🔥 full width */
+        width:100%;
+    }
+
+    /* IMAGE HEIGHT */
+    .my-recommend-card img{
+        height:240px;
+    }
+
+    /* PLAY BUTTON */
+    .my-recommend-play{
+        width:45px;
+        height:45px;
+        font-size:16px;
+    }
+
+    /* ACTION BUTTONS */
+    .my-recommend-actions button{
+        width:32px;
+        height:32px;
+        font-size:13px;
+    }
+
+    /* TEXT */
+    .my-recommend-overlay h4{
+        font-size:14px;
+    }
+}
+
+/* SECTION */
+.my-history-section{
+    padding:60px 5%;
+    background:#000;
+}
+
+/* TITLE */
+.my-history-title{
+    font-size:24px;
+    margin-bottom:25px;
+}
+
+/* ROW */
+.my-history-row{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+}
+
+.my-history-row::-webkit-scrollbar{
+    display:none;
+}
+
+/* CARD */
+.my-history-card{
+    min-width:260px;
+    background:#111;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+/* IMAGE */
+.my-history-card img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+}
+
+/* INFO */
+.my-history-info{
+    padding:15px;
+}
+
+.my-history-info h4{
+    margin:0;
+}
+
+.my-history-info p{
+    font-size:12px;
+    color:#aaa;
+    margin:8px 0;
+}
+
+/* BUTTON */
+.my-history-btn{
+    padding:8px 15px;
+    border:none;
+    border-radius:20px;
+    background:#e50914;
+    color:#fff;
+    cursor:pointer;
+    font-size:13px;
+}
+
+/* HOVER */
+.my-history-card:hover{
+    transform:translateY(-5px);
+    transition:0.3s;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header id="header">
+    <div class="logo">
+    <a href="index.html">
+        <img src="images/logo.webp" alt="Stackly Logo">
+    </a>
+</div>
+
+<div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<nav id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="tvshows.html">TV Shows</a>
+    <a href="movies.html">Movies</a>
+    <a href="newhot.html">New & Hot</a>
+    <a href="mylist.html" class="active">My List</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact US</a>
+</nav>
+
+<div class="auth-buttons" id="authButtons">
+    <button class="login" onclick="location.href='login.html'">Login</button>
+    <button class="subscribe" onclick="location.href='subscribe.html'">Subscribe</button>
+</div>
+</header>
+
+<section class="breadcrumb tv-breadcrumb">
+    
+    <div class="breadcrumb-overlay"></div>
+
+    <div class="breadcrumb-content">
+        <h1>My List</h1>
+        <p>
+            <a href="index.html">Home</a> / MyList
+        </p>
+    </div>
+
+</section>
+
+
+<section class="my-list-section">
+        <h2 class="section-title animate">My Favorite Movies</h2>
+
+    <div class="my-grid">
+
+        <!-- CARD -->
+        <div class="my-card animate">
+            <img src="images/movie1.webp">
+
+            <div class="my-overlay">
+                <div class="my-actions">
+                    <button class="my-play" onclick="location.href='404.html'">▶</button>
+<button class="my-remove" onclick="location.href='404.html'">✖</button>
+                </div>
+
+                <h3>Avengers</h3>
+                <p>Action • 2024</p>
+            </div>
+        </div>
+
+        <div class="my-card animate">
+            <img src="images/movie2.webp">
+            <div class="my-overlay">
+                <div class="my-actions">
+                    <button class="my-play" onclick="location.href='404.html'">▶</button>
+<button class="my-remove" onclick="location.href='404.html'">✖</button>
+                </div>
+                <h3>Batman</h3>
+                <p>Action • 2023</p>
+            </div>
+        </div>
+
+        <div class="my-card animate">
+            <img src="images/movie3.webp">
+            <div class="my-overlay">
+                <div class="my-actions">
+                   <button class="my-play" onclick="location.href='404.html'">▶</button>
+<button class="my-remove" onclick="location.href='404.html'">✖</button>
+                </div>
+                <h3>Joker</h3>
+                <p>Drama • 2022</p>
+            </div>
+        </div>
+
+        <div class="my-card animate">
+            <img src="images/movie4.webp">
+            <div class="my-overlay">
+                <div class="my-actions">
+                    <button class="my-play" onclick="location.href='404.html'">▶</button>
+<button class="my-remove" onclick="location.href='404.html'">✖</button>
+                </div>
+                <h3>Avatar</h3>
+                <p>Sci-Fi • 2024</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="my-continue-section">
+
+    <h2 class="my-continue-title animate">⏱ Continue Watching</h2>
+
+    <div class="my-continue-row">
+
+        <!-- CARD -->
+        <div class="my-continue-card animate">
+            <img src="images/rate1.webp">
+
+            <div class="my-continue-overlay">
+                <div class="my-continue-play" onclick="location.href='404.html'">▶</div>
+            </div>
+
+            <!-- PROGRESS -->
+            <div class="my-progress-bar">
+                <div class="my-progress" style="width:70%;"></div>
+            </div>
+
+            <p class="my-continue-name">Avengers Endgame</p>
+        </div>
+
+        <!-- CARD -->
+        <div class="my-continue-card animate">
+            <img src="images/rate2.webp">
+
+            <div class="my-continue-overlay">
+                <div class="my-continue-play" onclick="location.href='404.html'">▶</div>
+            </div>
+
+            <div class="my-progress-bar">
+                <div class="my-progress" style="width:40%;"></div>
+            </div>
+
+            <p class="my-continue-name">Batman</p>
+        </div>
+
+        <!-- CARD -->
+        <div class="my-continue-card animate">
+            <img src="images/rate4.webp">
+
+            <div class="my-continue-overlay">
+                <div class="my-continue-play" onclick="location.href='404.html'">▶</div>
+            </div>
+
+            <div class="my-progress-bar">
+                <div class="my-progress" style="width:85%;"></div>
+            </div>
+
+            <p class="my-continue-name">Joker</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="my-recommend-section">
+
+    <h2 class="my-recommend-title animate">Recommended For You</h2>
+
+    <div class="my-recommend-row">
+
+        <!-- CARD -->
+        <div class="my-recommend-card animate">
+            <img src="images/tv7.webp">
+
+            <div class="my-recommend-overlay">
+                <div class="my-recommend-play" onclick="location.href='404.html'">▶</div>
+
+                <div class="my-recommend-actions">
+                    <button class="my-add" onclick="location.href='404.html'">＋</button>
+                    <button class="my-like" onclick="location.href='404.html'">❤</button>
+                </div>
+
+                <h4>Avengers</h4>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="my-recommend-card animate">
+            <img src="images/tv8.webp">
+
+            <div class="my-recommend-overlay">
+                <div class="my-recommend-play" onclick="location.href='404.html'">▶</div>
+
+                <div class="my-recommend-actions">
+                    <button class="my-add" onclick="location.href='404.html'">＋</button>
+                    <button class="my-like" onclick="location.href='404.html'">❤</button>
+                </div>
+
+                <h4>Batman</h4>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="my-recommend-card animate">
+            <img src="images/tv9.webp">
+
+            <div class="my-recommend-overlay">
+                <div class="my-recommend-play" onclick="location.href='404.html'">▶</div>
+
+                <div class="my-recommend-actions">
+                    <button class="my-add" onclick="location.href='404.html'">＋</button>
+                    <button class="my-like" onclick="location.href='404.html'">❤</button>
+                </div>
+
+                <h4>Joker</h4>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="my-history-section">
+
+    <h2 class="my-history-title animate">🎥 Watch History</h2>
+
+    <div class="my-history-row">
+
+        <!-- CARD -->
+        <div class="my-history-card animate">
+            <img src="images/english2.webp">
+
+            <div class="my-history-info">
+                <h4>Avengers Endgame</h4>
+                <p>Watched on: 15 Mar 2026</p>
+
+                <button class="my-history-btn" onclick="location.href='404.html'">▶ Resume</button>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="my-history-card animate">
+            <img src="images/tamil.webp">
+
+            <div class="my-history-info">
+                <h4>Batman</h4>
+                <p>Watched on: 12 Mar 2026</p>
+
+                <button class="my-history-btn" onclick="location.href='404.html'">▶ Resume</button>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="my-history-card animate">
+            <img src="images/telugu1.webp">
+
+            <div class="my-history-info">
+                <h4>RRR</h4>
+                <p>Watched on: 10 Mar 2026</p>
+
+                <button class="my-history-btn" onclick="location.href='404.html'">▶ Resume</button>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="my-history-card animate">
+            <img src="images/english1.webp">
+
+            <div class="my-history-info">
+                <h4>Animal</h4>
+                <p>Watched on: 09 Mar 2026</p>
+
+                <button class="my-history-btn" onclick="location.href='404.html'">▶ Resume</button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="ott-footer">
+
+    <!-- BACKGROUND IMAGE -->
+    <div class="footer-bg"></div>
+
+    <div class="footer-content animate">
+
+        <!-- LEFT -->
+        <div class="footer-left">
+           <div class="footer-left">
+    <a href="index.html">
+        <img src="images/logo.webp" class="footer-logo">
+    </a>
+</div>
+            <h2>Unlimited Entertainment</h2>
+
+            <p>
+                Watch movies, TV shows, and live sports anywhere.
+                Cancel anytime.
+            </p>
+
+            <!-- DOWNLOAD -->
+            <div class="download-buttons">
+
+    <button class="app-btn" onclick="window.location.href='404.html'">
+        <i class="fab fa-google-play"></i> Android
+    </button>
+
+    <button class="app-btn" onclick="window.location.href='404.html'">
+        <i class="fab fa-apple"></i> iOS
+    </button>
+
+</div>
+        </div>
+
+        <!-- RIGHT LINKS -->
+     <div class="footer-right">
+
+    <!-- QUICK LINKS -->
+    <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="tvshows.html">TV Shows</a></li>
+            <li><a href="newhot.html">New & Hot</a></li>
+            <li><a href="mylist.html">My List</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+    </div>
+
+    <!-- CONTACT US -->
+    <div class="footer-column">
+        <h4>Contact Us</h4>
+        <ul>
+            <li><i class="fas fa-envelope"></i> support@stackly.com</li>
+            <li><i class="fas fa-phone"></i> +91 1234567890</li>
+            <li><i class="fas fa-map-marker-alt"></i> Chennai, India</li>
+        </ul>
+
+        <!-- SOCIAL ICONS -->
+        <div class="social-icons">
+            <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+            <a href="404.html"><i class="fab fa-twitter"></i></a>
+            <a href="404.html"><i class="fab fa-instagram"></i></a>
+            <a href="404.html"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+</div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+        © 2026 Stackly • All Rights Reserved
+    </div>
+
+</footer>
+
+<script>
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+        document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+    });
+});
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>

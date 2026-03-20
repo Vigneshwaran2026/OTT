@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly OTT</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+   /* TV SHOWS BACKGROUND */
+.tv-breadcrumb{
+    background-image: url("images/pricing.webp"); /* 🔥 your image */
+}
+
+/* DARK OVERLAY */
+.breadcrumb-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,0.9)
+    );
+}
+
+/* CONTENT */
+.breadcrumb-content{
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+/* TITLE */
+.breadcrumb-content h1{
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+/* PATH */
+.breadcrumb-content p{
+    color: #ccc;
+}
+
+.breadcrumb-content a{
+    color: #e50914;
+    text-decoration: none;
+}
+
+
+@media (max-width: 768px){
+
+    .breadcrumb{
+        height: 180px;
+        margin-top: 70px;
+    }
+
+    .breadcrumb-content h1{
+        font-size: 24px;
+    }
+
+    .breadcrumb-content p{
+        font-size: 13px;
+    }
+}
+
+
+/* SECTION */
+.ott-pricing{
+    padding:80px 5%;
+    text-align:center;
+    background:#000;
+    color:#fff;
+}
+
+/* TITLE */
+.ott-pricing-title{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.ott-pricing-sub{
+    color:#aaa;
+    margin-bottom:50px;
+}
+
+/* GRID */
+.ott-pricing-grid{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+/* CARD */
+.ott-plan{
+    width:300px;
+    padding:40px 25px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.1);
+    transition:0.4s;
+    position:relative;
+}
+
+/* HOVER */
+.ott-plan:hover{
+    transform:translateY(-10px) scale(1.05);
+    box-shadow:
+        0 0 20px rgba(229,9,20,0.4),
+        0 0 40px rgba(229,9,20,0.2);
+}
+
+/* POPULAR PLAN */
+.ott-popular{
+    border:2px solid #e50914;
+    box-shadow:0 0 25px rgba(229,9,20,0.5);
+}
+
+/* BADGE */
+.ott-badge{
+    position:absolute;
+    top:-12px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#e50914;
+    padding:5px 15px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+/* PRICE */
+.ott-plan h1{
+    font-size:40px;
+    margin:15px 0;
+}
+
+.ott-plan h1 span{
+    font-size:14px;
+    color:#aaa;
+}
+
+/* LIST */
+.ott-plan ul{
+    list-style:none;
+    margin:20px 0;
+}
+
+.ott-plan ul li{
+    margin:10px 0;
+    color:#ccc;
+}
+
+/* BUTTON */
+.ott-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:#333;
+    color:#fff;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+/* ACTIVE BUTTON */
+.ott-btn.active{
+    background:#e50914;
+}
+
+/* HOVER */
+.ott-btn:hover{
+    background:#e50914;
+    transform:scale(1.05);
+}
+
+/* SECTION */
+.ott-offer{
+    position:relative;
+    padding:50px 5%;
+    text-align:center;
+    background:url('images/offer-bg.webp') center/cover no-repeat;
+    overflow:hidden;
+}
+
+/* DARK OVERLAY */
+.ott-offer-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to right,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,0.9)
+    );
+}
+
+/* CONTENT */
+.ott-offer-content{
+    position:relative;
+    z-index:2;
+    max-width:700px;
+    margin:auto;
+    color:#fff;
+}
+
+/* TAG */
+.ott-offer-tag{
+    color:#e50914;
+    font-weight:600;
+}
+
+/* TITLE */
+.ott-offer-title{
+    font-size:40px;
+    margin:15px 0;
+}
+
+/* DESC */
+.ott-offer-desc{
+    color:#bbb;
+    margin-bottom:30px;
+}
+
+/* TIMER */
+.ott-timer{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+/* TIME BOX */
+.ott-time-box{
+    background:rgba(255,255,255,0.05);
+    padding:15px;
+    border-radius:10px;
+    min-width:70px;
+}
+
+.ott-time-box span{
+    font-size:24px;
+    color:#e50914;
+    font-weight:700;
+}
+
+.ott-time-box p{
+    font-size:12px;
+    color:#aaa;
+}
+
+/* BUTTON */
+.ott-offer-btn{
+    padding:14px 30px;
+    border:none;
+    border-radius:30px;
+    background:#e50914;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+/* HOVER */
+.ott-offer-btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 20px rgba(229,9,20,0.7);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header id="header">
+    <div class="logo">
+    <a href="index.html">
+        <img src="images/logo.webp" alt="Stackly Logo">
+    </a>
+</div>
+<div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<nav id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="tvshows.html">TV Shows</a>
+    <a href="movies.html">Movies</a>
+    <a href="newhot.html">New & Hot</a>
+    <a href="mylist.html">My List</a>
+    <a href="pricing.html" class="active">Pricing</a>
+    <a href="contact.html">Contact Us</a>
+</nav>
+
+<div class="auth-buttons" id="authButtons">
+    <button class="login" onclick="location.href='login.html'">Login</button>
+    <button class="subscribe" onclick="location.href='subscribe.html'">Subscribe</button>
+</div>
+</header>
+
+<section class="breadcrumb tv-breadcrumb">
+    
+    <div class="breadcrumb-overlay"></div>
+
+    <div class="breadcrumb-content">
+        <h1>Pricing</h1>
+        <p>
+            <a href="index.html">Home</a> / Pricing
+        </p>
+    </div>
+
+</section>
+
+
+<section class="ott-pricing">
+
+    <h2 class="ott-pricing-title animate">Choose Your Plan</h2>
+    <p class="ott-pricing-sub animate">Watch unlimited movies & TV shows anytime</p>
+
+    <div class="ott-pricing-grid">
+
+        <!-- BASIC -->
+        <div class="ott-plan animate">
+            <h3>Basic</h3>
+            <h1>₹199<span>/month</span></h1>
+
+            <ul>
+                <li>✔ Good video quality</li>
+                <li>✔ Watch on mobile & tablet</li>
+                <li>✔ Limited content access</li>
+            </ul>
+
+            <button class="ott-btn" onclick="location.href='404.html'">Get Started</button>
+        </div>
+
+        <!-- STANDARD -->
+        <div class="ott-plan ott-popular animate">
+            <span class="ott-badge">Most Popular</span>
+
+            <h3>Standard</h3>
+            <h1>₹499<span>/month</span></h1>
+
+            <ul>
+                <li>✔ HD streaming</li>
+                <li>✔ Watch on 2 devices</li>
+                <li>✔ Full content access</li>
+            </ul>
+
+            <button class="ott-btn active" onclick="location.href='404.html'">Choose Plan</button>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="ott-plan animate">
+            <h3>Premium</h3>
+            <h1>₹799<span>/month</span></h1>
+
+            <ul>
+                <li>✔ Ultra HD (4K)</li>
+                <li>✔ Watch on 4 devices</li>
+                <li>✔ Download & offline viewing</li>
+            </ul>
+
+            <button class="ott-btn" onclick="location.href='404.html'">Go Premium</button>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="ott-offer">
+
+    <div class="ott-offer-overlay"></div>
+
+    <div class="ott-offer-content animate">
+
+        <span class="ott-offer-tag">🔥 Limited Time Offer</span>
+
+        <h2 class="ott-offer-title">
+            Get 50% Off on Premium Plan
+        </h2>
+
+        <p class="ott-offer-desc">
+            Enjoy unlimited movies, exclusive shows, and 4K streaming at half the price.
+        </p>
+
+        <!-- COUNTDOWN -->
+        <div class="ott-timer">
+            <div class="ott-time-box">
+                <span id="days">02</span>
+                <p>Days</p>
+            </div>
+            <div class="ott-time-box">
+                <span id="hours">12</span>
+                <p>Hours</p>
+            </div>
+            <div class="ott-time-box">
+                <span id="minutes">45</span>
+                <p>Minutes</p>
+            </div>
+            <div class="ott-time-box">
+                <span id="seconds">30</span>
+                <p>Seconds</p>
+            </div>
+        </div>
+
+        <!-- BUTTON -->
+      <button class="ott-offer-btn" onclick="location.href='404.html'">
+    Claim Offer Now
+</button>
+
+    </div>
+
+</section>
+
+<footer class="ott-footer">
+
+    <!-- BACKGROUND IMAGE -->
+    <div class="footer-bg"></div>
+
+    <div class="footer-content animate">
+
+        <!-- LEFT -->
+        <div class="footer-left">
+           <div class="footer-left">
+    <a href="index.html">
+        <img src="images/logo.webp" class="footer-logo">
+    </a>
+</div>
+            <h2>Unlimited Entertainment</h2>
+
+            <p>
+                Watch movies, TV shows, and live sports anywhere.
+                Cancel anytime.
+            </p>
+
+            <!-- DOWNLOAD -->
+            <div class="download-buttons">
+
+    <button class="app-btn" onclick="window.location.href='404.html'">
+        <i class="fab fa-google-play"></i> Android
+    </button>
+
+    <button class="app-btn" onclick="window.location.href='404.html'">
+        <i class="fab fa-apple"></i> iOS
+    </button>
+
+</div>
+        </div>
+
+        <!-- RIGHT LINKS -->
+     <div class="footer-right">
+
+    <!-- QUICK LINKS -->
+    <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="tvshows.html">TV Shows</a></li>
+            <li><a href="newhot.html">New & Hot</a></li>
+            <li><a href="mylist.html">My List</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+    </div>
+
+    <!-- CONTACT US -->
+    <div class="footer-column">
+        <h4>Contact Us</h4>
+        <ul>
+            <li><i class="fas fa-envelope"></i> support@stackly.com</li>
+            <li><i class="fas fa-phone"></i> +91 1234567890</li>
+            <li><i class="fas fa-map-marker-alt"></i> Chennai, India</li>
+        </ul>
+
+        <!-- SOCIAL ICONS -->
+        <div class="social-icons">
+            <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+            <a href="404.html"><i class="fab fa-twitter"></i></a>
+            <a href="404.html"><i class="fab fa-instagram"></i></a>
+            <a href="404.html"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+</div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+        © 2026 Stackly • All Rights Reserved
+    </div>
+
+</footer>
+
+<script>
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+        document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+    });
+});
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>

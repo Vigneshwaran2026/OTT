@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly OTT</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+
+    /* SECTION */
+.movies-section{
+    padding:50px 60px;
+}
+
+/* GRID */
+.movies-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+/* CARD */
+.movie-box{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:0.3s;
+
+    border:2px solid #e50914;
+}
+
+/* IMAGE */
+.movie-box img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+/* HOVER */
+.movie-box:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(229,9,20,0.7);
+}
+
+/* OVERLAY */
+.movie-overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+
+    padding:15px;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.2)
+    );
+
+    opacity:0;
+    transition:0.3s;
+}
+
+.movie-box:hover .movie-overlay{
+    opacity:1;
+}
+
+/* ACTION BUTTONS */
+.movie-actions{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+/* COMMON BUTTON STYLE */
+.movie-actions button{
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#e50914;
+    color:#fff;
+    font-size:16px;
+
+    transition:0.3s;
+}
+
+/* HOVER */
+.movie-actions button:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 10px rgba(229,9,20,0.7);
+}
+
+/* TEXT */
+.movie-overlay h3{
+    margin-bottom:5px;
+}
+
+.movie-overlay p{
+    font-size:13px;
+    color:#ccc;
+}
+
+/* ===============================
+   TABLET (≤1024px)
+================================= */
+@media (max-width: 1024px){
+
+    .movies-section{
+        padding:40px 30px;
+    }
+
+    .movies-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:18px;
+    }
+
+    .movie-box img{
+        height:220px;
+    }
+}
+
+
+/* ===============================
+   MOBILE (≤768px)
+================================= */
+@media (max-width: 768px){
+
+    .movies-section{
+        padding:30px 20px;
+    }
+
+    .movies-grid{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .movie-box img{
+        height:200px;
+    }
+
+    .movie-actions button{
+        width:35px;
+        height:35px;
+        font-size:14px;
+    }
+
+    .movie-overlay h3{
+        font-size:16px;
+    }
+
+    .movie-overlay p{
+        font-size:12px;
+    }
+}
+
+
+/* ===============================
+   SMALL MOBILE (≤480px)
+================================= */
+@media (max-width: 480px){
+
+    .movies-section{
+        padding:20px 15px;
+    }
+
+    .movie-box{
+        border-radius:10px;
+    }
+
+    .movie-box img{
+        height:180px;
+    }
+
+    .movie-actions{
+        gap:8px;
+    }
+
+    .movie-actions button{
+        width:32px;
+        height:32px;
+        font-size:12px;
+    }
+
+    .movie-overlay{
+        padding:10px;
+    }
+
+    .movie-overlay h3{
+        font-size:14px;
+    }
+
+    .movie-overlay p{
+        font-size:11px;
+    }
+}
+   /* TV SHOWS BACKGROUND */
+.tv-breadcrumb{
+    background-image: url("images/movies-bg.webp"); /* 🔥 your image */
+}
+
+/* DARK OVERLAY */
+.breadcrumb-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,0.9)
+    );
+}
+
+/* CONTENT */
+.breadcrumb-content{
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+/* TITLE */
+.breadcrumb-content h1{
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+/* PATH */
+.breadcrumb-content p{
+    color: #ccc;
+}
+
+.breadcrumb-content a{
+    color: #e50914;
+    text-decoration: none;
+}
+
+
+@media (max-width: 768px){
+
+    .breadcrumb{
+        height: 180px;
+        margin-top: 70px;
+    }
+
+    .breadcrumb-content h1{
+        font-size: 24px;
+    }
+
+    .breadcrumb-content p{
+        font-size: 13px;
+    }
+}
+
+.categories-section{
+    padding:50px 60px;
+}
+
+/* TABS */
+.category-tabs{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.tab-btn{
+    padding:8px 18px;
+    border-radius:20px;
+    border:1px solid #444;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
+}
+
+.tab-btn.active{
+    background:#e50914;
+}
+
+/* CONTENT */
+.tab-content{
+    display:none;
+}
+.tab-content.active{
+    display:block;
+}
+
+/* ROW */
+.movie-row{
+    display:flex;
+    gap:15px;
+    overflow-x:auto;
+}
+
+.movie-row::-webkit-scrollbar{
+    display:none;
+}
+
+/* CARD */
+.movie-card{
+    position:relative;
+    min-width:200px;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    border:2px solid #e50914;
+}
+
+/* IMAGE */
+.movie-card img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+}
+
+/* OVERLAY */
+.movie-overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:15px;
+    background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0.2),
+    transparent
+);
+    opacity:0;
+    transition:0.3s;
+}
+
+
+.movie-overlay{
+    z-index: 2;
+}
+
+.movie-actions,
+.movie-overlay h3,
+.movie-overlay p{
+    position: relative;
+    z-index: 3;
+}
+
+.movie-card:hover .movie-overlay{
+    opacity:1;
+}
+
+/* BUTTONS */
+.movie-actions{
+    display:flex;
+    gap:8px;
+    margin-bottom:10px;
+}
+
+.movie-actions button{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    border:none;
+    background:#e50914;
+    color:#fff;
+}
+
+
+.movies-section {
+    padding: 60px 5%;
+    color: #fff;
+}
+
+.section-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* GRID */
+.movies-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* CARD */
+.movie-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+/* IMAGE */
+.movie-card img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+/* ZOOM */
+.movie-card:hover img {
+    transform: scale(1.1);
+}
+
+/* DARK OVERLAY */
+.movie-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.movie-card:hover::after {
+    opacity: 1;
+}
+
+/* PLAY BUTTON */
+.play-btn8 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 60px;
+    height: 60px;
+    background: #e50914;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    opacity: 0;
+    transition: 0.4s;
+    z-index: 2;
+}
+
+/* SHOW PLAY BUTTON */
+.movie-card:hover .play-btn8 {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* PLAY BUTTON HOVER */
+.play-btn8:hover {
+    background: #fff;
+    color: #e50914;
+}
+
+/* TEXT OVERLAY */
+.overlay8 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.95));
+    transform: translateY(100%);
+    transition: 0.4s;
+    z-index: 2;
+}
+
+.movie-card:hover .overlay8 {
+    transform: translateY(0);
+}
+
+.overlay8 h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.overlay8 p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* ===============================
+   TABLET (≤1024px)
+================================= */
+@media (max-width: 1024px){
+
+    .categories-section{
+        padding:40px 30px;
+    }
+
+    .movies-section{
+        padding:40px 30px;
+    }
+
+    /* GRID → 2 columns */
+    .movies-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    /* CARD IMAGE */
+    .movie-card img{
+        height:300px;
+    }
+
+    /* PLAY BUTTON */
+    .play-btn8{
+        width:50px;
+        height:50px;
+        font-size:18px;
+    }
+}
+
+
+/* ===============================
+   MOBILE (≤768px)
+================================= */
+@media (max-width: 768px){
+
+    .categories-section{
+        padding:30px 20px;
+    }
+
+    .movies-section{
+        padding:30px 20px;
+    }
+
+    /* TABS */
+    .category-tabs{
+        gap:8px;
+    }
+
+    .tab-btn{
+        padding:6px 14px;
+        font-size:13px;
+    }
+
+    /* MOVIE ROW (SCROLL) */
+    .movie-row{
+        gap:12px;
+    }
+
+    .movie-card{
+        min-width:160px;
+    }
+
+    .movie-card img{
+        height:220px;
+    }
+
+    /* GRID → 1 column */
+    .movies-container{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    /* PLAY BUTTON */
+    .play-btn8{
+        width:45px;
+        height:45px;
+        font-size:16px;
+    }
+
+    /* TEXT */
+    .overlay8 h3{
+        font-size:16px;
+    }
+
+    .overlay8 p{
+        font-size:12px;
+    }
+}
+
+
+/* ===============================
+   SMALL MOBILE (≤480px)
+================================= */
+@media (max-width: 480px){
+
+    .categories-section{
+        padding:20px 15px;
+    }
+
+    .movies-section{
+        padding:20px 15px;
+    }
+
+    /* TABS SCROLL */
+    .category-tabs{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+    }
+
+    .category-tabs::-webkit-scrollbar{
+        display:none;
+    }
+
+    .tab-btn{
+        white-space:nowrap;
+        font-size:12px;
+        padding:5px 12px;
+    }
+
+    /* MOVIE ROW */
+    .movie-card{
+        min-width:140px;
+    }
+
+    .movie-card img{
+        height:200px;
+    }
+
+    /* PLAY BUTTON */
+    .play-btn8{
+        width:40px;
+        height:40px;
+        font-size:14px;
+    }
+
+    /* OVERLAY */
+    .overlay8{
+        padding:12px;
+    }
+
+    .overlay8 h3{
+        font-size:14px;
+    }
+
+    .overlay8 p{
+        font-size:11px;
+    }
+}
+
+/* SECTION */
+.upcoming-section {
+    padding: 60px 5%;
+    background: #0b0b0b;
+    color: #fff;
+}
+
+/* BADGE */
+.badge1 {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #e50914;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    z-index: 3;
+    font-weight: 600;
+}
+
+/* OPTIONAL GLOW EFFECT */
+.movie-card1:hover .badge {
+    background: #ff1f2f;
+    box-shadow: 0 0 10px #e50914;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header id="header">
+   <div class="logo">
+    <a href="index.html">
+        <img src="images/logo.webp" alt="Stackly Logo">
+    </a>
+</div>
+
+<div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<nav id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="tvshows.html">TV Shows</a>
+    <a href="movies.html" class="active">Movies</a>
+    <a href="newhot.html">New & Hot</a>
+    <a href="mylist.html">My List</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact Us</a>
+</nav>
+
+<div class="auth-buttons" id="authButtons">
+    <button class="login" onclick="location.href='login.html'">Login</button>
+    <button class="subscribe" onclick="location.href='subscribe.html'">Subscribe</button>
+</div>
+</header>
+
+<section class="breadcrumb tv-breadcrumb">
+    
+    <div class="breadcrumb-overlay"></div>
+
+    <div class="breadcrumb-content">
+        <h1>Movies</h1>
+        <p>
+            <a href="index.html">Home</a> / Movies
+        </p>
+    </div>
+
+</section>
+
+
+<section class="movies-section">
+
+    <h2 class="section-title">Popular Movies</h2>
+
+    <div class="movies-grid">
+
+        <div class="movie-box">
+            <img src="images/movie1.webp">
+
+            <div class="movie-overlay">
+
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+
+                <h3>Avengers Endgame</h3>
+                <p>Action • 2024</p>
+
+            </div>
+        </div>
+
+        <div class="movie-box">
+            <img src="images/movie2.webp">
+
+            <div class="movie-overlay">
+
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+
+                <h3>Batman</h3>
+                <p>Action • 2023</p>
+
+            </div>
+        </div>
+
+        <div class="movie-box">
+            <img src="images/movie3.webp">
+
+            <div class="movie-overlay">
+
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+
+                <h3>Joker</h3>
+                <p>Drama • 2022</p>
+
+            </div>
+        </div>
+
+        <div class="movie-box">
+            <img src="images/movie4.webp">
+
+            <div class="movie-overlay">
+
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+
+                <h3>Avatar</h3>
+                <p>Sci-Fi • 2024</p>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="categories-section">
+
+<h2 class="section-title">Browse Categories</h2>
+
+<!-- TABS -->
+<div class="category-tabs">
+    <button class="tab-btn active" data-tab="action">Action</button>
+    <button class="tab-btn" data-tab="comedy">Comedy</button>
+    <button class="tab-btn" data-tab="horror">Horror</button>
+    <button class="tab-btn" data-tab="romance">Romance</button>
+    <button class="tab-btn" data-tab="scifi">Sci-Fi</button>
+    <button class="tab-btn" data-tab="tamil">Tamil</button>
+    <button class="tab-btn" data-tab="english">English</button>
+    <button class="tab-btn" data-tab="hindi">Hindi</button>
+    <button class="tab-btn" data-tab="malayalam">Malayalam</button>
+    <button class="tab-btn" data-tab="kannada">Kannada</button>
+    <button class="tab-btn" data-tab="telugu">Telugu</button>
+</div>
+
+<div class="category-content">
+
+<!-- 🔥 ACTION -->
+<div class="tab-content active" id="action">
+<div class="movie-row">
+
+<div class="movie-card">
+<img src="images/trending1.webp">
+<div class="movie-overlay">
+<div class="movie-actions">
+<button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+</div>
+<h3>Avengers</h3><p>Action • 2024</p>
+</div>
+</div>
+
+<div class="movie-card">
+<img src="images/trending2.webp">
+<div class="movie-overlay">
+<div class="movie-actions">
+<button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+</div>
+<h3>Batman</h3><p>Action • 2023</p>
+</div>
+</div>
+
+<div class="movie-card">
+<img src="images/trending3.webp">
+<div class="movie-overlay">
+<div class="movie-actions">
+<button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+</div>
+<h3>John Wick</h3><p>Action • 2022</p>
+</div>
+</div>
+
+<div class="movie-card">
+<img src="images/trending4.webp">
+<div class="movie-overlay">
+<div class="movie-actions">
+<button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+</div>
+<h3>Fast X</h3><p>Action • 2024</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="tab-content" id="comedy">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/tv1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+        <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>The Mask</h3>
+                <p>Comedy • 1994</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/tv2.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Mr Bean</h3>
+                <p>Comedy • 2007</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/tv3.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                   <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>The Hangover</h3>
+                <p>Comedy • 2009</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/tv4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Deadpool</h3>
+                <p>Comedy • 2023</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="tab-content" id="horror">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/slider1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>The Nun</h3>
+                <p>Horror • 2024</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/rate2.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>The Conjuring</h3>
+                <p>Horror • 2022</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/rate1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Insidious</h3>
+                <p>Horror • 2021</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/rate4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>IT</h3>
+                <p>Horror • 2020</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="tab-content" id="romance">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/series4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Titanic</h3>
+                <p>Romance • 1997</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/series3.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>The Notebook</h3>
+                <p>Romance • 2004</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/series5.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>La La Land</h3>
+                <p>Romance • 2016</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/series1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Before Sunrise</h3>
+                <p>Romance • 1995</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="tab-content" id="scifi">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/rate6.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                   <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Avatar</h3>
+                <p>Sci-Fi • 2024</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/rate7.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Interstellar</h3>
+                <p>Sci-Fi • 2014</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/rate8.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>The Matrix</h3>
+                <p>Sci-Fi • 1999</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/rate5.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Dune</h3>
+                <p>Sci-Fi • 2023</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="tab-content" id="tamil">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/tamil1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                   <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Leo</h3>
+                <p>Tamil • 2023</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/tamil2.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Vikram</h3>
+                <p>Tamil • 2022</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/tamil3.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Master</h3>
+                <p>Tamil • 2021</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/tamil4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Kaithi</h3>
+                <p>Tamil • 2019</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="tab-content" id="hindi">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/hindi1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Pathaan</h3>
+                <p>Hindi • 2023</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/hindi2.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Jawan</h3>
+                <p>Hindi • 2023</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/hindi3.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>3 Idiots</h3>
+                <p>Hindi • 2009</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/hindi4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Dangal</h3>
+                <p>Hindi • 2016</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="tab-content" id="english">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/movie4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                  <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Avatar</h3>
+                <p>English • 2024</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/english1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Oppenheimer</h3>
+                <p>English • 2023</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/english2.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Inception</h3>
+                <p>English • 2010</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/rate3.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>John Wick</h3>
+                <p>English • 2022</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="tab-content" id="malayalam">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/malayalam1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Drishyam</h3>
+                <p>Malayalam • 2013</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/malayalam2.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Premam</h3>
+                <p>Malayalam • 2015</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/malayalam3.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Lucifer</h3>
+                <p>Malayalam • 2019</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/malayalam4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>2018</h3>
+                <p>Malayalam • 2023</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="tab-content" id="kannada">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/kannada1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>K.G.F Chapter 1</h3>
+                <p>Kannada • 2018</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/kannada2.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>K.G.F Chapter 2</h3>
+                <p>Kannada • 2022</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/kannada3.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Kantara</h3>
+                <p>Kannada • 2022</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/kannada4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>777 Charlie</h3>
+                <p>Kannada • 2022</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="tab-content" id="kannada">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/kannada1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>K.G.F Chapter 1</h3>
+                <p>Kannada • 2018</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/kannada2.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>K.G.F Chapter 2</h3>
+                <p>Kannada • 2022</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/kannada3.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Kantara</h3>
+                <p>Kannada • 2022</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/kannada4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>777 Charlie</h3>
+                <p>Kannada • 2022</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="tab-content" id="telugu">
+    <div class="movie-row">
+
+        <!-- MOVIE 1 -->
+        <div class="movie-card">
+            <img src="images/telugu1.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>RRR</h3>
+                <p>Telugu • 2022</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 2 -->
+        <div class="movie-card">
+            <img src="images/telugu2.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Pushpa</h3>
+                <p>Telugu • 2021</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 3 -->
+        <div class="movie-card">
+            <img src="images/telugu3.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Baahubali</h3>
+                <p>Telugu • 2015</p>
+            </div>
+        </div>
+
+        <!-- MOVIE 4 -->
+        <div class="movie-card">
+            <img src="images/telugu4.webp">
+            <div class="movie-overlay">
+                <div class="movie-actions">
+                    <button class="play-btn" onclick="location.href='404.html'">▶</button>
+                    <button class="list-btn" onclick="location.href='404.html'">＋</button>
+                    <button class="share-btn" onclick="location.href='404.html'">⤴</button>
+                </div>
+                <h3>Salaar</h3>
+                <p>Telugu • 2023</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+</section>
+
+<section class="movies-section">
+
+    <h2 class="section-title">Latest Movies</h2>
+
+    <div class="movies-container">
+
+        <!-- Movie 1 -->
+        <div class="movie-card">
+            <img src="Images/latest1.webp" alt="Dune">
+            <div class="play-btn8" onclick="location.href='404.html'">▶</div>
+            <div class="overlay8">
+                <h3>Dune: Part Two</h3>
+                <p>Release Date: 01 Mar 2026</p>
+            </div>
+        </div>
+
+        <!-- Movie 2 -->
+        <div class="movie-card">
+            <img src="Images/latest2.webp" alt="Oppenheimer">
+            <div class="play-btn8" onclick="location.href='404.html'">▶</div>
+            <div class="overlay8">
+                <h3>Oppenheimer</h3>
+                <p>Release Date: 21 Jul 2026</p>
+            </div>
+        </div>
+
+        <!-- Movie 3 -->
+        <div class="movie-card">
+            <img src="Images/latest3.webp" alt="John Wick">
+            <div class="play-btn8" onclick="location.href='404.html'">▶</div>
+            <div class="overlay8">
+                <h3>John Wick: Chapter 4</h3>
+                <p>Release Date: 24 Mar 2026</p>
+            </div>
+        </div>
+
+        <!-- Movie 4 -->
+        <div class="movie-card">
+            <img src="Images/latest4.webp" alt="Avatar">
+            <div class="play-btn8" onclick="location.href='404.html'">▶</div>
+            <div class="overlay8">
+                <h3>Avatar: The Way of Water</h3>
+                <p>Release Date: 16 Dec 2025</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="upcoming-section">
+
+    <h2 class="section-title">Upcoming Movies</h2>
+
+    <div class="movies-container">
+
+        <!-- Movie 1 -->
+        <div class="movie-card">
+            <span class="badge1">Coming Soon</span>
+            <img src="Images/top1.webp" alt="">
+            <div class="play-btn8" onclick="location.href='404.html'">▶</div>
+            <div class="overlay8">
+                <h3>Avengers: Secret Wars</h3>
+                <p>Release Date: 01 May 2026</p>
+            </div>
+        </div>
+
+        <!-- Movie 2 -->
+        <div class="movie-card">
+            <span class="badge1">Coming Soon</span>
+            <img src="Images/top2.webp" alt="">
+          <div class="play-btn8" onclick="location.href='404.html'">▶</div>
+            <div class="overlay8">
+                <h3>Deadpool 3</h3>
+                <p>Release Date: 26 Jul 2026</p>
+            </div>
+        </div>
+
+        <!-- Movie 3 -->
+        <div class="movie-card">
+            <span class="badge1">Coming Soon</span>
+            <img src="Images/top3.webp" alt="">
+            <div class="play-btn8" onclick="location.href='404.html'">▶</div>
+            <div class="overlay8">
+                <h3>Mission Impossible 8</h3>
+                <p>Release Date: 28 Jun 2026</p>
+            </div>
+        </div>
+
+        <!-- Movie 4 -->
+        <div class="movie-card">
+            <span class="badge1">Coming Soon</span>
+            <img src="Images/top4.webp" alt="">
+            <div class="play-btn8" onclick="location.href='404.html'">▶</div>
+            <div class="overlay8">
+                <h3>Joker 2</h3>
+                <p>Release Date: 04 Oct 2026</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="ott-footer">
+
+    <!-- BACKGROUND IMAGE -->
+    <div class="footer-bg"></div>
+
+    <div class="footer-content animate">
+
+        <!-- LEFT -->
+        <div class="footer-left">
+           <div class="footer-left">
+    <a href="index.html">
+        <img src="images/logo.webp" class="footer-logo">
+    </a>
+</div>
+            <h2>Unlimited Entertainment</h2>
+
+            <p>
+                Watch movies, TV shows, and live sports anywhere.
+                Cancel anytime.
+            </p>
+
+            <!-- DOWNLOAD -->
+            <div class="download-buttons">
+
+    <button class="app-btn" onclick="window.location.href='404.html'">
+        <i class="fab fa-google-play"></i> Android
+    </button>
+
+    <button class="app-btn" onclick="window.location.href='404.html'">
+        <i class="fab fa-apple"></i> iOS
+    </button>
+
+</div>
+        </div>
+
+        <!-- RIGHT LINKS -->
+     <div class="footer-right">
+
+    <!-- QUICK LINKS -->
+    <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="tvshows.html">TV Shows</a></li>
+            <li><a href="newhot.html">New & Hot</a></li>
+            <li><a href="mylist.html">My List</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+    </div>
+
+    <!-- CONTACT US -->
+    <div class="footer-column">
+        <h4>Contact Us</h4>
+        <ul>
+            <li><i class="fas fa-envelope"></i> support@stackly.com</li>
+            <li><i class="fas fa-phone"></i> +91 1234567890</li>
+            <li><i class="fas fa-map-marker-alt"></i> Chennai, India</li>
+        </ul>
+
+        <!-- SOCIAL ICONS -->
+        <div class="social-icons">
+            <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+            <a href="404.html"><i class="fab fa-twitter"></i></a>
+            <a href="404.html"><i class="fab fa-instagram"></i></a>
+            <a href="404.html"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+</div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+        © 2026 Stackly • All Rights Reserved
+    </div>
+
+</footer>
+
+<script>
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+        document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+    });
+});
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>

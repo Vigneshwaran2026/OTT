@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly OTT</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+
+
+/* TV SHOWS BACKGROUND */
+.tv-breadcrumb{
+    background-image: url("images/tv-bg.webp"); /* 🔥 your image */
+}
+
+/* DARK OVERLAY */
+.breadcrumb-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,0.9)
+    );
+}
+
+/* CONTENT */
+.breadcrumb-content{
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+/* TITLE */
+.breadcrumb-content h1{
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+/* PATH */
+.breadcrumb-content p{
+    color: #ccc;
+}
+
+.breadcrumb-content a{
+    color: #e50914;
+    text-decoration: none;
+}
+
+
+@media (max-width: 768px){
+
+    .breadcrumb{
+        height: 180px;
+        margin-top: 70px;
+    }
+
+    .breadcrumb-content h1{
+        font-size: 24px;
+    }
+
+    .breadcrumb-content p{
+        font-size: 13px;
+    }
+}
+
+
+    /* SECTION */
+.tv-trending{
+    padding:40px 60px;
+}
+
+/* TITLE */
+.section-title{
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+/* ROW */
+.tv-row{
+    display:flex;
+    gap:15px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+}
+
+.tv-row::-webkit-scrollbar{
+    display:none;
+}
+
+/* CARD */
+.tv-card{
+    position:relative;
+    min-width:200px;
+    height:280px;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.tv-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* HOVER */
+.tv-card:hover{
+    transform:scale(1.1);
+    z-index:5;
+}
+
+/* OVERLAY */
+.tv-overlay{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.9),
+        transparent
+    );
+
+    opacity:0;
+    transition:0.3s;
+}
+
+.tv-card:hover .tv-overlay{
+    opacity:1;
+}
+
+.tv-overlay span{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.tv-overlay p{
+    margin-bottom:15px;
+}
+@media (max-width:768px){
+
+    .tv-trending{
+        padding:20px;
+    }
+
+    .tv-card{
+        min-width:140px;
+        height:200px;
+    }
+
+}
+
+/* SECTION */
+.tv-top-rated{
+    padding:50px 60px;
+}
+
+/* GRID */
+.tv-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+/* CARD */
+.tv-box{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.tv-box img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+/* HOVER SCALE */
+.tv-box:hover{
+    transform:scale(1.08);
+    z-index:5;
+}
+
+/* RATING */
+.rating{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:rgba(0,0,0,0.7);
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+/* HOVER OVERLAY */
+.tv-hover{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.3)
+    );
+
+    opacity:0;
+    transition:0.3s;
+}
+
+/* SHOW ON HOVER */
+.tv-box:hover .tv-hover{
+    opacity:1;
+}
+
+/* PLAY BUTTON */
+.play-btn{
+    width:60px;
+    height:60px;
+    background:#e50914;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+/* TEXT */
+.tv-hover h3{
+    margin-bottom:5px;
+}
+
+.tv-hover p{
+    font-size:13px;
+    color:#ccc;
+}
+
+@media (max-width:768px){
+
+    .tv-top-rated{
+        padding:30px 20px;
+    }
+
+    .tv-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:15px;
+    }
+
+    .tv-box img{
+        height:160px;
+    }
+
+}
+
+.tv-row a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tv-card {
+    cursor: pointer;
+}
+
+.tv-grid a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.episode-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.kids-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header id="header">
+   <div class="logo">
+    <a href="index.html">
+        <img src="images/logo.webp" alt="Stackly Logo">
+    </a>
+</div>
+
+<div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<nav id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="tvshows.html" class="active">TV Shows</a>
+    <a href="movies.html">Movies</a>
+    <a href="newhot.html">New & Hot</a>
+    <a href="mylist.html">My List</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact Us</a>
+</nav>
+
+<div class="auth-buttons" id="authButtons">
+    <button class="login" onclick="location.href='login.html'">Login</button>
+    <button class="subscribe" onclick="location.href='subscribe.html'">Subscribe</button>
+</div>
+</header>
+
+<section class="breadcrumb tv-breadcrumb">
+    
+    <div class="breadcrumb-overlay"></div>
+
+    <div class="breadcrumb-content animate">
+        <h1>TV Shows</h1>
+        <p>
+            <a href="index.html">Home</a> / TV Shows
+        </p>
+    </div>
+
+</section>
+
+<section class="tv-trending">
+
+    <h2 class="section-title animate">Trending TV Shows</h2>
+
+    <div class="tv-row">
+
+        <a href="404.html">
+            <div class="tv-card animate">
+                <img src="images/tv1.webp">
+                <div class="tv-overlay">
+                    <span>▶</span>
+                    <p>Stranger Things</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html">
+            <div class="tv-card animate">
+                <img src="images/tv2.webp">
+                <div class="tv-overlay">
+                    <span>▶</span>
+                    <p>The Witcher</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html">
+            <div class="tv-card animate">
+                <img src="images/tv3.webp">
+                <div class="tv-overlay">
+                    <span>▶</span>
+                    <p>Money Heist</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html">
+            <div class="tv-card animate">
+                <img src="images/tv4.webp">
+                <div class="tv-overlay">
+                    <span>▶</span>
+                    <p>Breaking Bad</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html">
+            <div class="tv-card animate">
+                <img src="images/tv5.webp">
+                <div class="tv-overlay">
+                    <span>▶</span>
+                    <p>Dark</p>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+<section class="tv-top-rated">
+
+    <h2 class="section-title animate">Top Rated Shows</h2>
+
+    <div class="tv-grid">
+
+        <a href="404.html">
+            <div class="tv-box animate">
+                <img src="images/tv6.webp">
+                <div class="rating">⭐ 9.2</div>
+
+                <div class="tv-hover">
+                    <div class="play-btn">▶</div>
+                    <h3>Breaking Bad</h3>
+                    <p>Watch Now</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html">
+            <div class="tv-box animate">
+                <img src="images/tv7.webp">
+                <div class="rating">⭐ 8.9</div>
+
+                <div class="tv-hover">
+                    <div class="play-btn">▶</div>
+                    <h3>The Witcher</h3>
+                    <p>Watch Now</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html">
+            <div class="tv-box animate">
+                <img src="images/tv8.webp">
+                <div class="rating">⭐ 9.0</div>
+
+                <div class="tv-hover">
+                    <div class="play-btn">▶</div>
+                    <h3>Stranger Things</h3>
+                    <p>Watch Now</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html">
+            <div class="tv-box animate">
+                <img src="images/tv9.webp">
+                <div class="rating">⭐ 8.8</div>
+
+                <div class="tv-hover">
+                    <div class="play-btn">▶</div>
+                    <h3>Money Heist</h3>
+                    <p>Watch Now</p>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+<section class="new-episodes">
+
+    <h2 class="section-title animate">New Episodes This Week</h2>
+
+    <div class="episode-row">
+
+        <a href="404.html" class="episode-link">
+            <div class="episode-card animate">
+                <span class="day">Mon</span>
+                <img src="images/tv10.webp">
+                <div class="episode-info">
+                    <h3>Stranger Things</h3>
+                    <p>Season 4 • Episode 6</p>
+                </div>
+                <div class="play-btn-corner">▶</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="episode-link">
+            <div class="episode-card animate">
+                <span class="day">Tue</span>
+                <img src="images/tv11.webp">
+                <div class="episode-info">
+                    <h3>The Witcher</h3>
+                    <p>Season 3 • Episode 2</p>
+                </div>
+                <div class="play-btn-corner">▶</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="episode-link">
+            <div class="episode-card animate">
+                <span class="day">Wed</span>
+                <img src="images/tv12.webp">
+                <div class="episode-info">
+                    <h3>Money Heist</h3>
+                    <p>Season 5 • Episode 4</p>
+                </div>
+                <div class="play-btn-corner">▶</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="episode-link">
+            <div class="episode-card animate">
+                <span class="day">Thu</span>
+                <img src="images/tv13.webp">
+                <div class="episode-info">
+                    <h3>Dark</h3>
+                    <p>Season 2 • Episode 3</p>
+                </div>
+                <div class="play-btn-corner">▶</div>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+<section class="kids-section">
+
+    <h2 class="section-title kids-title animate">Kids Channel</h2>
+
+    <div class="kids-row">
+
+        <a href="404.html" class="kids-link">
+            <div class="kids-card animate">
+                <img src="images/tv14.webp">
+                <div class="kids-overlay">
+                    <div class="kids-play">▶</div>
+                    <p>Dora Adventures</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="kids-link">
+            <div class="kids-card animate">
+                <img src="images/tv15.webp">
+                <div class="kids-overlay">
+                    <div class="kids-play">▶</div>
+                    <p>Tom & Jerry</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="kids-link">
+            <div class="kids-card animate">
+                <img src="images/tv17.webp">
+                <div class="kids-overlay">
+                    <div class="kids-play">▶</div>
+                    <p>Peppa Pig</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="kids-link">
+            <div class="kids-card animate">
+                <img src="images/tv16.webp">
+                <div class="kids-overlay">
+                    <div class="kids-play">▶</div>
+                    <p>Chhota Bheem</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="kids-link">
+            <div class="kids-card animate">
+                <img src="images/tv18.webp">
+                <div class="kids-overlay">
+                    <div class="kids-play">▶</div>
+                    <p>Paw Patrol</p>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="sports">
+
+    <h2 class="section-title animate">Live Sports</h2>
+
+    <div class="sports-grid">
+
+        <div class="sport-card live animate">
+            <img src="images/match1.webp">
+            <span class="live-badge">LIVE</span>
+
+            <div class="overlay5">
+                <div class="teams">
+                    <h3>IND</h3>
+                    <span>VS</span>
+                    <h3>AUS</h3>
+                </div>
+
+                <p class="score">245/6 (40.2)</p>
+
+                <button class="watch-btn" onclick="location.href='404.html'">▶ Watch Live</button>
+            </div>
+        </div>
+
+        <div class="sport-card animate">
+            <img src="images/match2.webp">
+
+            <div class="overlay5">
+                <div class="teams">
+                    <h3>MI</h3>
+                    <span>VS</span>
+                    <h3>CSK</h3>
+                </div>
+
+                <p class="score">Today • 7:30 PM</p>
+
+                <button class="watch-btn" onclick="location.href='404.html'">▶ Watch</button>
+            </div>
+        </div>
+
+        <div class="sport-card animate">
+            <img src="images/match3.webp">
+
+            <div class="overlay5">
+                <div class="teams">
+                    <h3>BAR</h3>
+                    <span>VS</span>
+                    <h3>RMA</h3>
+                </div>
+
+                <p class="score">Tomorrow • 9:00 PM</p>
+
+                <button class="watch-btn" onclick="location.href='404.html'">▶ Watch</button>
+            </div>
+        </div>
+
+        <div class="sport-card animate">
+            <img src="images/match4.webp">
+
+            <div class="overlay5">
+                <div class="teams">
+                    <h3>IND</h3>
+                    <span>VS</span>
+                    <h3>ENG</h3>
+                </div>
+
+                <p class="score">Upcoming</p>
+
+                <button class="watch-btn" onclick="location.href='404.html'">▶ Watch</button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="ott-footer">
+
+    <!-- BACKGROUND IMAGE -->
+    <div class="footer-bg"></div>
+
+    <div class="footer-content animate">
+
+        <!-- LEFT -->
+        <div class="footer-left">
+           <div class="footer-left">
+    <a href="index.html">
+        <img src="images/logo.webp" class="footer-logo">
+    </a>
+</div>
+            <h2>Unlimited Entertainment</h2>
+
+            <p>
+                Watch movies, TV shows, and live sports anywhere.
+                Cancel anytime.
+            </p>
+
+            <!-- DOWNLOAD -->
+            <div class="download-buttons">
+
+    <button class="app-btn" onclick="window.location.href='404.html'">
+        <i class="fab fa-google-play"></i> Android
+    </button>
+
+    <button class="app-btn" onclick="window.location.href='404.html'">
+        <i class="fab fa-apple"></i> iOS
+    </button>
+
+</div>
+        </div>
+
+        <!-- RIGHT LINKS -->
+     <div class="footer-right">
+
+    <!-- QUICK LINKS -->
+    <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="tvshows.html">TV Shows</a></li>
+            <li><a href="newhot.html">New & Hot</a></li>
+            <li><a href="mylist.html">My List</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+    </div>
+
+    <!-- CONTACT US -->
+    <div class="footer-column">
+        <h4>Contact Us</h4>
+        <ul>
+            <li><i class="fas fa-envelope"></i> support@stackly.com</li>
+            <li><i class="fas fa-phone"></i> +91 1234567890</li>
+            <li><i class="fas fa-map-marker-alt"></i> Chennai, India</li>
+        </ul>
+
+        <!-- SOCIAL ICONS -->
+        <div class="social-icons">
+            <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+            <a href="404.html"><i class="fab fa-twitter"></i></a>
+            <a href="404.html"><i class="fab fa-instagram"></i></a>
+            <a href="404.html"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+</div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+        © 2026 Stackly • All Rights Reserved
+    </div>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

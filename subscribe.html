@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<style>
+ /* REGISTER SECTION */
+.register-section{
+    min-height:100vh;
+    background:#000;
+    position:relative;
+}
+
+/* BACK BUTTON */
+.back-home{
+    position:absolute;
+    top:20px;
+    left:20px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#fff;
+    text-decoration:none;
+    background:rgba(255,255,255,0.08);
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    transition:0.3s;
+    z-index:10;
+}
+
+.back-home i{
+    font-size:16px;
+}
+
+.back-home:hover{
+    background:#e50914;
+    transform:translateX(-5px);
+}
+
+/* CONTAINER */
+.register-container{
+    display:flex;
+    height:100vh;
+}
+
+
+/* DARK OVERLAY */
+.image-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to right,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.6)
+    );
+}
+
+
+.left-logo{
+    width:200px;
+    margin-bottom:20px;
+}
+
+/* LEFT SIDE (CENTER CONTENT) */
+.register-left{
+    width:60%;
+    position:relative;
+    background:url("images/pricing.webp") center/cover no-repeat;
+    display:flex;
+    justify-content:center;   /* center horizontally */
+    align-items:center;       /* center vertically */
+    text-align:center;        /* center text */
+    padding:40px;
+}
+
+/* CONTENT CENTER */
+.image-content{
+    position:relative;
+    z-index:2;
+    color:#fff;
+    max-width:500px;
+}
+
+/* OPTIONAL: BETTER SPACING */
+.image-content h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.image-content p{
+    color:#ccc;
+    margin-bottom:20px;
+    line-height:1.6;
+}
+
+.image-content ul{
+    list-style:none;
+    padding:0;
+}
+
+.image-content ul li{
+    margin:10px 0;
+    color:#ddd;
+}
+/* RIGHT SIDE */
+.register-right{
+    width:40%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* FORM BOX */
+.register-box{
+    width:320px;
+}
+
+/* TITLE */
+.register-box h2{
+    color:#fff;
+    margin-bottom:20px;
+}
+
+/* INPUT */
+.reg-input{
+    margin-bottom:15px;
+}
+
+.reg-input input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+}
+
+.reg-input input:focus{
+    border-color:#e50914;
+    outline:none;
+}
+
+/* BUTTON */
+.reg-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:#e50914;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.reg-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 15px rgba(229,9,20,0.6);
+}
+
+/* LOGIN LINK */
+.login-link{
+    color:#aaa;
+    margin-top:15px;
+}
+
+/* LOGIN LINK BUTTON STYLE */
+.login-link a{
+    color:#e50914;
+    text-decoration:none;
+    position:relative;
+    font-weight:600;
+    transition:0.3s;
+}
+
+/* UNDERLINE ANIMATION */
+.login-link a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-3px;
+    width:0%;
+    height:2px;
+    background:#e50914;
+    transition:0.3s;
+}
+
+/* HOVER EFFECT */
+.login-link a:hover{
+    color:#fff;
+    text-shadow:0 0 8px rgba(229,9,20,0.8);
+}
+
+.login-link a:hover::after{
+    width:100%;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media(max-width:768px){
+
+    /* FULL STACK */
+    .register-container{
+        flex-direction:column;
+        height:auto;
+    }
+
+    /* BACK BUTTON */
+    .back-home{
+        top:15px;
+        left:15px;
+        padding:8px 14px;
+        font-size:12px;
+    }
+
+    /* LEFT IMAGE SECTION */
+    .register-left{
+        width:100%;
+        height:55vh;
+        padding:20px;
+        justify-content:center;
+        align-items:center;
+    }
+
+    /* CONTENT */
+    .image-content{
+        max-width:100%;
+        padding:10px;
+    }
+
+    .left-logo{
+        width:120px;
+        margin-bottom:15px;
+    }
+
+    .image-content h1{
+        font-size:22px;
+        line-height:1.4;
+    }
+
+    .image-content p{
+        font-size:13px;
+        line-height:1.5;
+    }
+
+    .image-content ul li{
+        font-size:13px;
+    }
+
+    /* RIGHT FORM SECTION */
+    .register-right{
+        width:100%;
+        height:auto;
+        padding:30px 20px;
+    }
+
+    .register-box{
+        width:100%;
+        max-width:350px;
+    }
+
+    .register-box h2{
+        font-size:22px;
+        text-align:center;
+    }
+
+    /* INPUT */
+    .reg-input input{
+        padding:10px;
+        font-size:14px;
+    }
+
+    /* BUTTON */
+    .reg-btn{
+        padding:10px;
+        font-size:14px;
+    }
+
+    /* LOGIN LINK */
+    .login-link{
+        text-align:center;
+        font-size:13px;
+    }
+}
+
+
+@media(max-width:480px){
+
+    .image-content h1{
+        font-size:18px;
+    }
+
+    .image-content p{
+        font-size:12px;
+    }
+
+    .left-logo{
+        width:100px;
+    }
+
+    .register-box h2{
+        font-size:20px;
+    }
+}
+
+.error{
+    color:#e50914;
+    font-size:12px;
+    display:block;
+    margin-top:5px;
+}
+
+/* SUCCESS MESSAGE */
+.success-msg{
+    display:none;
+    color:#0a4f13;
+    padding:12px;
+    border-radius:6px;
+    text-align:center;
+    margin-bottom:15px;
+    font-size:14px;
+    animation:fadeIn 0.5s ease;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(-10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* SELECT DROPDOWN FIX */
+.reg-input select{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    appearance:none;
+
+    /* ADD CUSTOM ARROW */
+    background-image: url("data:image/svg+xml,%3Csvg fill='%23ffffff' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size:16px;
+
+    cursor:pointer;
+}
+
+/* FOCUS */
+.reg-input select:focus{
+    border-color:#e50914;
+    outline:none;
+}
+</style>
+</head>
+<body>
+
+<section class="register-section">
+
+    <!-- BACK BUTTON -->
+    <a href="index.html" class="back-home">
+        <i class="fa-solid fa-arrow-left-long"></i>
+        <span>Back to Home</span>
+    </a>
+
+    <div class="register-container">
+
+        <!-- LEFT IMAGE SIDE (BIGGER) -->
+        <div class="register-left">
+
+            <div class="image-overlay"></div>
+
+            <div class="image-content">
+                <img src="images/logo.png" class="left-logo">
+
+                <h1>Unlimited Movies, TV Shows & More</h1>
+                <p>Watch anywhere. Cancel anytime. Enjoy premium streaming experience with Stackly OTT.</p>
+
+                <ul>
+                    <li>✔ 4K Ultra HD Streaming</li>
+                    <li>✔ Watch on any device</li>
+                    <li>✔ Download & watch offline</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- RIGHT FORM SIDE -->
+        <div class="register-right">
+
+            <div class="register-box">
+
+                <h2>Create Your Account</h2>
+
+              <form id="registerForm">
+
+    <div class="reg-input">
+        <input type="text" id="username" placeholder="Username">
+        <small class="error" id="userError"></small>
+    </div>
+
+    <div class="reg-input">
+        <input type="email" id="email" placeholder="Email Address">
+        <small class="error" id="emailError"></small>
+    </div>
+
+    <div class="reg-input">
+    <select id="role">
+        <option value="">Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="subscriber">Subscriber</option>
+    </select>
+    <small class="error" id="roleError"></small>
+</div>
+
+    <div class="reg-input">
+        <input type="password" id="password" placeholder="Password">
+        <small class="error" id="passError"></small>
+    </div>
+
+    <div class="reg-input">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password">
+        <small class="error" id="confirmError"></small>
+    </div>
+
+    <button type="submit" class="reg-btn">Sign Up</button>
+
+</form>
+                <p class="login-link">
+                    Already have account?
+                    <a href="login.html">Login</a>
+                </p>
+
+                <div id="successMsg" class="success-msg">
+    Registration Successful  Redirecting...
+</div>
+
+            </div>
+
+            
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const form = document.getElementById("registerForm");
+
+    form.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        let username = document.getElementById("username").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("password").value.trim();
+        let confirmPassword = document.getElementById("confirmPassword").value.trim();
+        let role = document.getElementById("role").value; // ✅ FIX ADDED
+
+        let isValid = true;
+
+        // CLEAR ERRORS
+        document.getElementById("userError").innerText = "";
+        document.getElementById("emailError").innerText = "";
+        document.getElementById("passError").innerText = "";
+        document.getElementById("confirmError").innerText = "";
+        document.getElementById("roleError").innerText = "";
+
+        // USERNAME
+        if(username === ""){
+            document.getElementById("userError").innerText = "Username required";
+            isValid = false;
+        }
+
+        // EMAIL
+        let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if(email === ""){
+            document.getElementById("emailError").innerText = "Email required";
+            isValid = false;
+        } else if(!email.match(emailPattern)){
+            document.getElementById("emailError").innerText = "Invalid email";
+            isValid = false;
+        }
+
+        // ROLE VALIDATION ✅
+        if(role === ""){
+            document.getElementById("roleError").innerText = "Please select role";
+            isValid = false;
+        }
+
+        // PASSWORD
+        let strongPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+        if(password === ""){
+            document.getElementById("passError").innerText = "Password required";
+            isValid = false;
+        } else if(!strongPassword.test(password)){
+            document.getElementById("passError").innerText =
+            "Min 8 chars, 1 uppercase, 1 lowercase, 1 number & 1 special char";
+            isValid = false;
+        }
+
+        // CONFIRM PASSWORD
+        if(confirmPassword === ""){
+            document.getElementById("confirmError").innerText = "Confirm password required";
+            isValid = false;
+        } else if(confirmPassword !== password){
+            document.getElementById("confirmError").innerText = "Password not match";
+            isValid = false;
+        }
+
+        // SUCCESS → ONLY IF ALL VALID ✅
+        if(isValid){
+
+            document.getElementById("successMsg").style.display = "block";
+
+            setTimeout(()=>{
+                window.location.href = "login.html"; // ✅ ALWAYS LOGIN PAGE
+            },2000);
+        }
+
+    });
+
+});
+</script>
+
+
+</body>
+</html>
